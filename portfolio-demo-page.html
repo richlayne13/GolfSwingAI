@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golf Swing AI Trainer - Portfolio Project</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #4CAF50, #8BC34A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.8;
+        }
+
+        .demo-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .demo-container {
+            background: #333;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .demo-frame {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 10px;
+            background: #1a1a1a;
+        }
+
+        .info-panel {
+            background: #2c2c2c;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #444;
+            font-size: 1.1em;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .tech-tag {
+            background: #4CAF50;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #333;
+            color: white;
+            border: 2px solid #666;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .loading-message {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2em;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            .demo-section {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .demo-frame {
+                height: 500px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏌️‍♂️ Golf Swing AI Trainer</h1>
+            <p>AI-powered golf swing analysis with real-time video processing</p>
+        </div>
+
+        <div class="demo-section">
+            <div class="demo-container">
+                <div class="loading-message" id="loadingMessage">
+                    Loading Golf Swing AI Trainer...
+                </div>
+                <iframe 
+                    src="https://your-golf-app-url.netlify.app"
+                    class="demo-frame"
+                    id="demoFrame"
+                    style="display: none;"
+                    onload="hideLoading()">
+                </iframe>
+            </div>
+
+            <div class="info-panel">
+                <h2>🚀 Features</h2>
+                <ul class="feature-list">
+                    <li>📹 <strong>Video Recording & Upload</strong> - Record swing videos or upload existing ones</li>
+                    <li>🤖 <strong>AI-Powered Analysis</strong> - Advanced swing analysis using Google Gemini AI</li>
+                    <li>🎯 <strong>Frame-by-Frame Feedback</strong> - Detailed analysis of key swing phases</li>
+                    <li>💬 <strong>Interactive Chat</strong> - Ask follow-up questions about your swing</li>
+                    <li>🎨 <strong>Modern UI</strong> - Clean, professional design</li>
+                    <li>📱 <strong>Cross-Platform</strong> - Works on mobile and web</li>
+                </ul>
+
+                <h3>🛠️ Tech Stack</h3>
+                <div class="tech-stack">
+                    <span class="tech-tag">React Native</span>
+                    <span class="tech-tag">Expo</span>
+                    <span class="tech-tag">Google Gemini AI</span>
+                    <span class="tech-tag">Computer Vision</span>
+                    <span class="tech-tag">Video Processing</span>
+                </div>
+
+                <div class="buttons">
+                    <a href="https://your-golf-app-url.netlify.app" target="_blank" class="btn btn-primary">
+                        🚀 Open Full App
+                    </a>
+                    <a href="https://github.com/yourusername/golf-swing-ai" target="_blank" class="btn btn-secondary">
+                        💻 View Code
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-panel">
+            <h2>🎯 About This Project</h2>
+            <p>
+                The Golf Swing AI Trainer is a cutting-edge mobile application that combines modern web technologies 
+                with artificial intelligence to provide golfers with professional-level swing analysis. Built with 
+                React Native and Expo, it features real-time video processing and AI-powered feedback using Google's 
+                Gemini AI model.
+            </p>
+            <br>
+            <p>
+                This project demonstrates advanced mobile app development skills, AI integration, computer vision 
+                capabilities, and cross-platform deployment. It's designed to work seamlessly on both mobile devices 
+                and web browsers, making it accessible to users across different platforms.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function hideLoading() {
+            document.getElementById('loadingMessage').style.display = 'none';
+            document.getElementById('demoFrame').style.display = 'block';
+        }
+
+        // Fallback to hide loading message after 10 seconds
+        setTimeout(hideLoading, 10000);
+    </script>
+</body>
+</html>

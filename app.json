@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "GolfSwingAI",
-    "slug": "GolfSwingAI",
+    "name": "Golf Swing AI Trainer",
+    "slug": "golf-swing-ai-trainer",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -10,17 +10,46 @@
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#1a1a1a"
     },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow Golf Swing AI Trainer to use your camera to record golf swing videos.",
+          "microphonePermission": "Allow Golf Swing AI Trainer to use your microphone to record videos with audio.",
+          "recordAudioAndroid": true
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow Golf Swing AI Trainer to access your photos and videos for analysis.",
+          "savePhotosPermission": "Allow Golf Swing AI Trainer to save recorded videos to your photo library.",
+          "isAccessMediaLocationEnabled": true
+        }
+      ]
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app needs access to camera to record golf swing videos for AI analysis.",
+        "NSMicrophoneUsageDescription": "This app needs access to microphone to record videos with audio.",
+        "NSPhotoLibraryUsageDescription": "This app needs access to photo library to save and retrieve golf swing videos."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#1a1a1a"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
