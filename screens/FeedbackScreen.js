@@ -21,8 +21,8 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import { StatusBar } from 'expo-status-bar';
 import * as VideoThumbnails from 'expo-video-thumbnails';
 
-// Google Gemini API key
-const API_KEY = 'AIzaSyAQUuCNr8XsyuapGvAiiVbjqOh3umBaOSg';
+// Google Gemini API key from environment variables
+const API_KEY = process.env.GOOGLE_GEMINI_API_KEY || process.env.EXPO_PUBLIC_GOOGLE_GEMINI_API_KEY;
 
 export default function FeedbackScreen({ route, navigation }) {
   const { videoUri } = route.params;
@@ -34,7 +34,13 @@ export default function FeedbackScreen({ route, navigation }) {
   const [frameAnalysis, setFrameAnalysis] = useState([]);
   const [isExtractingFrames, setIsExtractingFrames] = useState(false);
   const scrollViewRef = useRef(null);
-  const genAI = new GoogleGenerativeAI(API_KEY);
+  
+  // Check if API key is available
+  if (!API_KEY) {
+    console.error('Google Gemini API key is not configured');
+  }
+  
+  const genAI = API_KEY ? new GoogleGenerativeAI(API_KEY) : null;
 
   useEffect(() => {
     analyzeSwing();
@@ -97,6 +103,11 @@ export default function FeedbackScreen({ route, navigation }) {
 
   const analyzeFrameWithAI = async (frame, frameIndex) => {
     try {
+      if (!genAI) {
+        console.warn('Google Gemini AI not available, using fallback analysis');
+        return `Focus on maintaining good posture and balance during your ${frame.phase.toLowerCase()}.`;
+      }
+      
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       
       // Convert frame to base64
@@ -262,6 +273,18 @@ Note: Frame extraction failed, so this is a general analysis. Try recording a ne
     setIsSendingMessage(true);
 
     try {
+      if (!genAI) {
+        console.warn('Google Gemini AI not available, using fallback response');
+        const fallbackMessage = {
+          id: Date.now() + 1,
+          text: "I'd be happy to help with your golf swing! However, the AI service is currently unavailable. Please check your API key configuration and try again.",
+          isUser: false,
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        };
+        setMessages(prev => [...prev, fallbackMessage]);
+        return;
+      }
+      
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       
       const context = `You are a professional golf instructor who just analyzed someone's complete golf swing video. You provided comprehensive feedback about their swing phases, technique, and areas for improvement.
